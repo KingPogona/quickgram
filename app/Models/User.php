@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use App\Mail\NewUserWelcomMail;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Mail;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -43,6 +45,21 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::created(function ($user) {
+            $user->profile()->create([
+                'title' => $user->username,
+            ]);
+
+            Mail::to($user->email)->send(new NewUserWelcomMail());
+
+
+        });
+    }
+
     public function profile()
     {
         return $this->hasOne(Profile::class);
@@ -51,5 +68,10 @@ class User extends Authenticatable
     public function posts()
     {
         return $this->hasMany(Post::class)->orderBy('created_at', 'DESC');
+    }
+
+    public function following()
+    {
+        return $this->belongsToMany(Profile::class);
     }
 }
