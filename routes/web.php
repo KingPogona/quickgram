@@ -30,12 +30,17 @@ Auth::routes();
 Route::post('follow/{user}', [Controllers\FollowsController::class, 'store']);
 
 
+// profile routes
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/profile/{user}', [Controllers\ProfilesController::class, 'index'])->name('profile.show');
 Route::get('/profile/{user}/edit', [Controllers\ProfilesController::class, 'edit'])->name('profile.edit');
 Route::patch('/profile/{user}', [Controllers\ProfilesController::class, 'update'])->name('profile.update');
 
+// posts routes
 Route::get('/', [Controllers\PostsController::class, 'index']);
 Route::get('/p/create', [Controllers\PostsController::class, 'create']);
 Route::post('/p', [Controllers\PostsController::class, 'store']);
 Route::get('/p/{post}', [Controllers\PostsController::class, 'show']);
+
+// search routes
+Route::get('/search/{searchTerm}', [Controllers\SearchController::class, 'show']);

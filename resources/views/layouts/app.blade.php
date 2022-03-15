@@ -29,6 +29,17 @@
                     </div>
                     <div class="ps-3 pt-1">{{ config('app.name') }}</div>
                 </a>
+
+                {{-- <form class="d-flex container" method="GET" action="/search"> action="/p" enctype="multipart/form-data" method="POST"
+                    @csrf
+
+                            <input class="form-control mx-auto w-50" id="search" type="search" class="form-control" name="search" placeholder="Search" required autocomplete="off" aria-label="Search">
+
+                </form> --}}
+
+                <search-field></search-field>
+
+
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
