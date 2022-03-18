@@ -72,7 +72,7 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="/profile/{{ $user->id }}">
+                                    <a class="dropdown-item" href="/profile/{{ Auth::user()->username }}">
                                         My Profile Page
                                     </a>
 
