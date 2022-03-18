@@ -44,3 +44,6 @@ Route::get('/p/{post}', [Controllers\PostsController::class, 'show']);
 
 // search routes
 Route::get('/search/{searchTerm}', [Controllers\SearchController::class, 'show']);
+
+// file upload routes
+Route::post('/upload', 'FileUploadController@storeUploads');

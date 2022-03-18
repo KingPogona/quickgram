@@ -54,13 +54,14 @@ class ProfilesController extends Controller
             'image' => '',
         ]);
 
-        // $imagePath = 'error';
-
         if (request('image')) {
-            $imagePath = request('image')->store('profile', 'public');
-
-            $image = Image::make(public_path("storage/{$imagePath}"))->fit(1000, 1000);
-            $image->save();
+            $imagePath = cloudinary()->upload(request('image')->getRealPath(), [
+                'folder' => 'profile-images',
+                'transformation' => [
+                    'width' => 1000,
+                    'height' => 1000
+                ]
+            ])->getSecurePath();
 
             $imageArray = ['image' => $imagePath];
         }

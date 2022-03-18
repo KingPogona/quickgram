@@ -14,7 +14,7 @@
                 <div class="row">
                     <div class="col-6 offset-3">
                         <a href="/profile/{{ $post->user->id }}">
-                            <img src="/storage/{{ $post->image }}" alt="" class="w-100">
+                            <img src="{{ $post->image }}" alt="" class="w-100">
                         </a>
                     </div>
                 </div>

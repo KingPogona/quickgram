@@ -32,21 +32,23 @@ class PostsController extends Controller
     {
         $data = request()->validate([
             'caption' => 'required',
-            'file' => ['required','image'],
+            'file' => ['required', 'image'],
         ]);
 
-        $imagePath = request('file')->store('uploads', 'public');
-
-
-        $image = Image::make(public_path("storage/{$imagePath}"))->fit(1200, 1200);
-        $image->save();
+        $imagePath = cloudinary()->upload(request('file')->getRealPath(), [
+            'folder' => 'posts-images',
+            'transformation' => [
+                'width' => 1200,
+                'height' => 1200
+            ]
+        ])->getSecurePath();
 
         auth()->user()->posts()->create([
             'caption' => $data['caption'],
             'image' => $imagePath,
         ]);
 
-        return redirect('/profile/' .auth()->user()->id);
+        return redirect('/profile/' . auth()->user()->id);
     }
 
     public function show(Post $post)

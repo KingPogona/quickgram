@@ -11,7 +11,7 @@ class Profile extends Model
 
     public function profileImage()
     {
-        return ($this->image) ? '/storage/' . $this->image : '/assets/images/noImage.svg';
+        return ($this->image) ? $this->image : '/assets/images/noImage.svg';
     }
 
     public function user()

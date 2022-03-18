@@ -16,7 +16,7 @@ class SearchController extends Controller
                 'followers' => $profile->followers->count(),
                 'posts' => $profile->user->posts->count(),
                 'title' => $profile->title,
-                'image' => $profile->image,
+                'image' => $profile->profileImage(),
                 'id' => $profile->id
             );
         };
